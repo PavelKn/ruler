@@ -71,11 +71,20 @@ namespace Ruler
 		public MainForm()
 			: this(RulerInfo.GetDefaultRulerInfo())
 		{
-            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
-            IntPtr desktop = g.GetHdc();
+            using (var desktopHwnd = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                var hdc = desktopHwnd.GetHdc();
 
-            _dpiX = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSX);
-            _dpiY = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSY);
+                try
+                {
+                    _dpiX = GetDeviceCaps(hdc, (int)DeviceCap.LOGPIXELSX);
+                    _dpiY = GetDeviceCaps(hdc, (int)DeviceCap.LOGPIXELSY);
+                }
+                finally
+                {
+                    desktopHwnd.ReleaseHdc(hdc);
+                }
+            }
         }
 
         public MainForm(RulerInfo rulerInfo)
