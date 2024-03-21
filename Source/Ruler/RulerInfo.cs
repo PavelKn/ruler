@@ -15,7 +15,7 @@
 		}
 
 		/// <summary>
-		/// TODO
+		/// TODO  
 		/// </summary>
 		public bool IsVertical
 		{

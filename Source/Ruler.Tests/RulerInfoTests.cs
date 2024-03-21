@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ruler.Test
+namespace Ruler.Tests
 {
 	[TestClass]
 	public class RulerInfoTests
